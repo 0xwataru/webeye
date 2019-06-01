@@ -1,7 +1,8 @@
 FROM python:3.6
 LABEL MAINTAINER=hahadaxia
 ENV TZ=Asia/Shanghai
-EXPOSE 5000
+#EXPOSE 5000
+RUN apt-get update
 RUN apt-get install --no-install-recommends -y curl gnupg git  supervisor software-properties-common wget
 RUN curl https://openresty.org/package/pubkey.gpg | apt-key add -
 RUN add-apt-repository -y "deb http://openresty.org/package/debian $(lsb_release -sc) openresty"
