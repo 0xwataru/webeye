@@ -13,10 +13,14 @@ COPY ./deploy /webeye/deploy
 RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r /webeye/deploy/requirements.txt -U
 RUN cp /webeye/deploy/nginx/*.conf /usr/local/openresty/nginx/conf/
 RUN cp /webeye/deploy/supervisor/*.conf /etc/supervisor/conf.d/
-COPY ./api /webeye/api
-COPY ./configure /webeye/configure
-COPY ./controllers /webeye/controllers
-COPY ./utils  /webeye/utils
+
+COPY ./static /webeye/static
+COPY ./templates /webeye/templates
+COPY ./_Rules.db /webeye/_Rules.db
+COPY ./Rules.db  /webeye/Rules.db
+COPY ./config.ini  /webeye/config.ini
+COPY ./database.py  /webeye/database.py
+COPY ./fingerprint.py  /webeye/fingerprint.py
 COPY ./app.py /webeye/app.py
 WORKDIR /webeye
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
